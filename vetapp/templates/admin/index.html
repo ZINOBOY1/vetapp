@@ -1,0 +1,72 @@
+{% extends 'admin/base2.html' %}
+
+{% block content %}
+
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Admin Dashboard</h1>
+                </div>
+
+                <div class="row">
+                    <!-- Recent Orders -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Recent Orders</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <th>Price</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in recent_orders %}
+                                        <tr>
+                                            <td>{{ order.customer.customer_fullname }}</td> 
+                                            <td>&#8358;{{ order.order_total }}</td>                                            
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                             
+
+                    <!-- Recent Customers -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Recent Customers</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        {% for customer in customers %}
+                                            <tr>
+                                                <td>
+                                                    <h6>{{ customer.customer_fullname }} <br><small class="text-muted">{{ customer.customer_email }}</small></h6>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </main>
+        </div>
+    </div>
+    
+
+   
+    {% endblock %}

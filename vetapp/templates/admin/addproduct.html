@@ -1,0 +1,83 @@
+{% extends 'admin/base2.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=True)%}
+{% if messages %}
+  {% for cat, msg in messages %}
+    {% if cat =='error'%}
+        <div class="alert alert-danger">{{ msg }}</div>
+    {% else %}
+        <div class="alert alert-success">{{ msg }}</div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+<h1>Add New Product</h1>
+<form method="post" enctype="multipart/form-data" novalidate>
+    {{ pform.csrf_token() }}
+    <div class="col-6">
+        {{ pform.name.label }}
+        {{ pform.name(class="form-control") }}
+    </div>
+    <div class="col-6">
+        {{ pform.description.label }}
+        {{ pform.description(class="form-control") }}
+    </div>
+    <div class="col-6">
+        {{ pform.price.label }}
+        {{ pform.price(class="form-control") }}
+    </div>
+    <div class="col-6 mb-3">
+        {{ pform.picture.label }}
+        {{ pform.picture(class="form-control") }}
+    </div>
+    <div class="col-6 mb-3">
+        {{ pform.category_id.label }}
+        {{ pform.category_id(class="form-control") }}
+    </div>
+    <div class="col-6 mb-3">
+        {{ pform.breed_id.label }}
+        {{ pform.breed_id(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-warning">Add Product</button>
+</form>
+
+
+    <h2 class="text-center mt-3">Existing Products</h2>
+    <table class="table table-striped py-5">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in result %}
+            <tr>
+                <td>{{ loop.index}}</td>
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.product_price }}</td>
+                <td>{{ product.date_added }}</td>
+                <td>
+                    <form method="post" style="display:inline;">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                        <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                        <button class="btn btn-danger" type="submit" name="delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+{% endblock %}

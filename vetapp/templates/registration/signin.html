@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - VetPlus Clinic</title>
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/static/sign.css">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon/android-icon-36x36.png">
+  <style>
+   #message{
+    color: red;
+   }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=True)%}
+    {% if messages %}
+      {% for cat, msg in messages %}
+        {% if cat =='error'%}
+            <div class="alert alert-danger">{{ msg }}</div>
+        {% else %}
+            <div class="alert alert-success">{{ msg }}</div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    
+   
+    <form class="form-signin mt-5" method="post" action="/vetapp/login/"  novalidate>
+      <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+      <h2 class="text-center mb-4">Sign In</h2>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="email" class="form-control mb-3" name="email" placeholder="Email address" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="pass" class="form-control mb-3" name="pass" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <div>
+            <p id="message"></p>
+        </div>
+        <label>
+          <input type="checkbox" value="remember-me" name="me">Remember me
+        </label>
+      </div>
+      <button class="btn btn-primary text-center" type="submit" id="sign" >Sign in</button>
+      <p class="text-center mt-3">Don't have an account? <a href="/vetapp/signup/" >Sign Up</a></p>
+    </form>
+  </div>
+
+
+  
+
+  <script src="/static/bootstrap/js/bootstrap.js"></script>
+  <script src="/static/jquery-3.7.1.min.js"></script>
+  <script>
+     
+  </script>
+</body>
+</html>

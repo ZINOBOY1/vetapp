@@ -1,0 +1,55 @@
+{% extends 'user/base3.html' %}
+
+{% block content %}
+
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <img src="/static/uploads/{{ product.product_picture }}" alt="{{ product.name }}" class="product-image">
+        </div>
+        <!-- Product Details -->
+        <div class="col-md-6 my-5">
+            <h1 class="mb-3">{{ product.product_name }}</h1>
+            <p class="lead">{{ product.description }}</p>
+            <p class="price">${{ product.product_price }}</p>
+            <form id="add-to-cart-form" action="/add_to_cart/{{ product.product_id }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                <div class="center-button">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#add-to-cart-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission  
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            alert(response.message); 
+                        } else {
+                            alert(response.message); 
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('An error occurred: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+{% endblock %}

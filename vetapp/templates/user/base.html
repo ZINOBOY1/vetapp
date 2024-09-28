@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vet Clinic</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/FA/css/all.css" >
+</head>
+{% with messages = get_flashed_messages(with_categories=True)%}
+{% if messages %}
+  {% for cat, msg in messages %}
+    {% if cat =='error'%}
+        <div class="alert alert-danger">{{ msg }}</div>
+    {% else %}
+        <div class="alert alert-success">{{ msg }}</div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+<body>
+      <div class="container-fluid">
+          <div class="container-fluid">
+              <div class="navbar-top">
+                  <div class="logo1">
+                      <img src="/static/img/favicon/logo.png" alt="VET PLUS Logo">
+                  </div>
+                  <div class="logo">
+                      <h3>VET PLUS</h3>
+                  </div>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+          </div>
+  
+          <div>
+              <nav class="navbar navbar-expand-md" id="nav-color">
+                  <div class="container-fluid">
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                          <div class="navbar-nav mx-auto">
+                              <a class="nav-link text-white" aria-current="page" href="#">Home</a>
+                              <a class="nav-link text-white" href="#services">Our Services</a>
+                              <a class="nav-link text-white" href="/product/page/">Shop</a>
+                              <a class="nav-link text-white" href="#contact">Contact Us</a>
+                          </div>
+                          <div class="collapse navbar-collapse mx-auto" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                {% if session.get('customer_id') %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Welcome, {{ resort_deets.customer_fullname }}
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <!-- <li><a class="dropdown-item" href="/profile">Profile</a></li> -->
+                                            <li><a class="dropdown-item" href="/view_cart">Cart</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="/vetapp/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/vetapp/login/"><strong> Login </strong></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                          
+                      </div>
+                      
+                  </div>
+              </nav>
+          </div>
+          <div class="background-container">
+            <h1>VetPlus
+                <br>Your very own pet store in nigeria.
+            </h1>
+            <p>Your trusted partner in pet care, offering compassionate service and expert veterinary care for every furry family member.</p>
+            <div id="btn1">
+                <a href="/product/page/" class="btn btn-primary">Shop Now</a>
+            </div>
+            
+        </div>
+      </div>
+          
+  
+    </div>
+    
+</div>
+{% block content %}
+
+{% endblock %}
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Vet Plus. All rights reserved.</p>
+    </footer>
+
+    <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+    
+{% block customjs %}
+    
+{% endblock customjs%}
+</body>
+</html>

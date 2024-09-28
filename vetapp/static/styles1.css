@@ -1,0 +1,189 @@
+body {
+    font-family: Arial, sans-serif;
+    
+}
+.navbar-top{
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+}
+.logo1 img{
+  margin-left: 10px;
+  cursor: pointer;
+}
+.logo1 img:hover{
+  border-radius: 50px;
+}
+.logo h3{
+  font-weight: bold;
+  font-size: 20px;
+
+}
+
+#nav-color{
+  background-color: rgba(238, 244,208);
+}
+.navbar-nav{
+  margin:auto;
+
+}
+.nav-link{
+  margin-left: 30px;
+  font-weight: bold;
+  color: black;
+}
+.nav-link:hover{
+  color:lightskyblue;
+}
+.content{
+  margin-top: 150px;
+  margin-left: 60px;
+
+}
+.content h1{
+  font-size: 50px;
+}
+#btn1 button{
+  height: 32px;
+  width: 145px;
+  background: transparent;
+  border: 1px solid black;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+#btn1 button:hover{
+  background-color: lightskyblue;
+}
+
+.mynav{
+  border-bottom: 4px solid blue;
+  position: fixed;
+  z-index: 1;
+  background-color: #f8f9fa;
+}
+#hero {
+    background: no-repeat center center;
+    background-image:url(background.jpg);
+    background-size: cover;
+    color: white;
+    height: 517px;
+    margin-top: 16px;
+    
+    display: flex;
+    align-items: center;
+    
+}
+.side-bar {
+    background-color:whitesmoke;
+    width: 250px;
+    border-radius: 15px;
+    height: 589px;
+    margin-right: 56px;
+}
+
+.product-pic-side-bar{
+    width:50px
+}
+
+#hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.d-carousel{
+    /* width: %; */
+    padding-bottom: 100px;
+}
+
+#hero p {
+    font-size: 1.25rem;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    background-color: whitesmoke;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.myhome{
+    /* height: 90vh; */
+    margin-bottom: 50px;
+    padding-bottom: 100px;
+
+}
+.box{
+    border: 2px solid #f8f9fa; 
+}
+#aboutus{
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+}
+.footer{
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding-top: 100px;
+  }
+  .footer-links a {
+    color: #6c757d;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  .footer1{
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .contact-form {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+  }
+  #foot{
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+  .mycontact{
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+  .mytest{
+    margin-top: 100px;
+  }
+  .myfaqs{
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+  .free{
+    margin-top: 120px;
+    padding-bottom: 100px;
+  }
+  .myservices{
+    margin-top: 120px;
+    padding-bottom: 100px;
+
+  }
+  .btn a{
+    text-decoration: none !important;
+  }

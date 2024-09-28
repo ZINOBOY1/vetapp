@@ -1,0 +1,33 @@
+{% extends 'user/base3.html' %}
+
+{% block content %}
+    <!-- Checkout Section -->
+    <section id="checkout" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Checkout</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form method="post" action="/checkout">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+                        <div class="form-group">
+                            <label for="payment_amount">Total Amount</label>
+                            <p class="readonly-text">	&#8358;{{ total_amount }}</p> <!-- Display total amount as normal text -->
+                        </div>
+            
+                        <!-- Display User Information -->
+                        {% if session.get('customer_id') %}
+                        <div class="user-info">
+                            <h5>Customer Information:</h5>
+                            <p><strong>Name:</strong> {{resort_deets.customer_fullname}} </p>
+                            <p><strong>Email:</strong> {{resort_deets.customer_email}}</p>
+                        </div>
+                        {% endif %}
+            
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>      
+    </section>
+{% endblock %}

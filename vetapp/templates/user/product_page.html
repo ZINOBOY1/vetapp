@@ -1,0 +1,48 @@
+{% extends 'user/base3.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <div class="position-sticky">
+                <h4>Breeds</h4>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#breedList" role="button" aria-expanded="false" aria-controls="breedList">
+                            Breeds
+                        </a>
+                        <div class="collapse" id="breedList">
+                            <ul class="list-unstyled ps-3">
+                                {% for breed in breeds %}
+                                <li>
+                                    <a class="nav-link breed-link" href="#" data-breed-id="{{ breed.breed_id }}">{{ breed.breed_name }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+                <h4>Categories</h4>
+                <ul class="nav flex-column">
+                    {% for category in categories %}
+                    <li class="nav-item">
+                        <a class="nav-link category-link" href="#" data-category-id="{{ category.category_id }}">{{ category.category_name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+            <h1>Products</h1>
+            <div id="productList" class="row">
+                
+            </div>
+        </main>
+        
+    </div>
+</div>
+{% endblock %}

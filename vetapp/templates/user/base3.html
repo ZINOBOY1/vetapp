@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vet Clinic</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/styles1.css">
+    <link rel="stylesheet" href="/static/FA/css/all.css">
+</head>
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+  {% for cat, msg in messages %}
+    {% if cat == 'error' %}
+        <div class="alert alert-danger">{{ msg }}</div>
+    {% else %}
+        <div class="alert alert-success">{{ msg }}</div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+<body>
+<div class="container-fluid">
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="logo1 me-2">
+            <img src="/static/img/favicon/logo.png" alt="Logo" width="120px">
+        </div>
+    </div>
+
+    <div class="header">
+        <nav class="navbar navbar-expand-md" id="nav-color">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav mx-auto">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" href="/product/page/">Shop</a>
+                    </div>
+                    <ul class="navbar-nav ms-auto">
+                      {% if session.get('customer_id') %}
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  {{ resort_deets.customer_fullname }}
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <!-- <li><a class="dropdown-item" href="/profile">Profile</a></li> -->
+                                  <li><a class="dropdown-item" href="/view_cart">Cart</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="/vetapp/logout">Logout</a></li>
+                              </ul>
+                          </li>
+                      {% else %}
+                          <li class="nav-item">
+                              <a class="nav-link" href="/vetapp/login/"><strong> Login </strong></a>
+                          </li>
+                      {% endif %}
+                  </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+{% block content %}
+
+{% endblock %}
+
+<footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 Vet Plus. All rights reserved.</p>
+</footer>
+
+<script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+      // Function to fetch and display all products
+      function fetchAllProducts() {
+          $.ajax({
+              url: '/get_all_products',
+              method: 'GET',
+              success: function(response) {
+                  $('#productList').empty(); 
+  
+                  if (response.products.length > 0) {
+                      response.products.forEach(function(product) {
+                          $('#productList').append(`
+                              <div class="col-md-4 mb-4">
+                                  <div class="card">
+                                      <img src="/static/uploads/${product.product_picture}" class="card-img-top" alt="${product.product_name}">
+                                      <div class="card-body">
+                                          <h5 class="card-title">${product.product_name}</h5>
+                                          <p class="card-text">${product.description.slice(0, 10)} ...read more</p>
+                                          <p class="card-text">₦${product.product_price}</p>
+                                          <form action="/aboutproduct/${product.product_id}" method="post">
+                                              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                              <button type="submit" class="btn btn-primary">Add to cart</button>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          `);
+                      });
+                  } else {
+                      $('#productList').append('<p>No products available.</p>');
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error fetching products:', error);
+                  $('#productList').append('<p>Error fetching products. Please try again.</p>');
+              }
+          });
+      }
+      fetchAllProducts();
+      // AJAX call for breed selection
+      $('.breed-link').on('click', function(event) {
+          event.preventDefault();
+  
+          const breedId = $(this).data('breed-id');
+  
+          $.ajax({
+              url: '/get_products_by_breed/' + breedId,
+              method: 'GET',
+              success: function(response) {
+                  $('#productList').empty();
+  
+                  if (response.products.length > 0) {
+                      response.products.forEach(function(product) {
+                          $('#productList').append(`
+                              <div class="col-md-4 mb-4">
+                                  <div class="card">
+                                      <img src="/static/uploads/${product.product_picture}" class="card-img-top" alt="${product.product_name}">
+                                      <div class="card-body">
+                                          <h5 class="card-title">${product.product_name}</h5>
+                                          <p class="card-text">${product.description.slice(0, 10)} ...read more</p>
+                                          <p class="card-text">₦${product.product_price}</p>
+                                          <form action="/aboutproduct/${product.product_id}" method="post">
+                                              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                              <button type="submit" class="btn btn-primary">Add to cart</button>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          `);
+                      });
+                  } else {
+                      $('#productList').append('<p>No products found for this breed.</p>');
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error fetching products:', error);
+                  $('#productList').append('<p>Error fetching products. Please try again.</p>');
+              }
+          });
+      });
+
+      // to fetch category
+      $('.category-link').on('click', function(event) {
+          event.preventDefault();
+
+          const categoryId = $(this).data('category-id');
+
+          $.ajax({
+              url: '/get_products_by_category/' + categoryId,
+              method: 'GET',
+              success: function(response) {
+                  $('#productList').empty();
+
+                  if (response.products.length > 0) {
+                      response.products.forEach(function(product) {
+                          $('#productList').append(`
+                              <div class="col-md-4 mb-4">
+                                  <div class="card">
+                                      <img src="/static/uploads/${product.product_picture}" class="card-img-top" alt="${product.product_name}">
+                                      <div class="card-body">
+                                          <h5 class="card-title">${product.product_name}</h5>
+                                          <p class="card-text">${product.description.slice(0, 10)} ...read more</p>
+                                          <p class="card-text">₦${product.product_price}</p>
+                                          <form action="/aboutproduct/${product.product_id}" method="post">
+                                              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                              <button type="submit" class="btn btn-primary">Add to cart</button>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          `);
+                      });
+                  } else {
+                      $('#productList').append('<p>No products found in this category.</p>');
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error fetching products:', error);
+                  $('#productList').append('<p>Error fetching products. Please try again.</p>');
+              }
+          });
+      });
+  });
+  </script>
+  
+
+  
+
+{% block customjs %}
+    
+{% endblock customjs %}
+</body>
+</html>

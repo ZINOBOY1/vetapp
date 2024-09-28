@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/sign.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon/android-icon-36x36.png">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 400px;
+            margin-top: 5rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .alert {
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Signup</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="/vetapp/signup/" method="post" novalidate>
+            {{ register.csrf_token }}
+
+            <div class="mb-3">
+                {{ register.name.label(class='form-label') }}
+                {{ register.name(class='form-control', placeholder='Enter your name here') }}
+                {% if register.name.errors %}
+                    {% for error in register.name.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ register.email.label(class='form-label') }}
+                {{ register.email(class='form-control', placeholder='Enter your email') }}
+                {% if register.email.errors %}
+                    {% for error in register.email.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ register.address.label(class='form-label') }}
+                {{ register.address(class='form-control', placeholder='Enter your address here') }}
+                {% if register.address.errors %}
+                    {% for error in register.address.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                {{ register.password.label(class='form-label') }}
+                {{ register.password(class='form-control', placeholder='Password') }}
+                {% if register.password.errors %}
+                    {% for error in register.password.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                {{ register.conpass.label(class='form-label') }}
+                {{ register.conpass(class='form-control', placeholder='Confirm Password') }}
+                {% if register.conpass.errors %}
+                    {% for error in register.conpass.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="text-center">
+                {{ register.submit(class='btn btn-primary') }}
+            </div>
+
+            <div class="text-center mt-3">
+                <p>Already have an account? <a href="/vetapp/login/">Login</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script src="/static/jquery-3.7.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.myhome{
+    /* height: 90vh; */
+    margin-bottom: 50px;
+    padding-bottom: 100px;
+
+}
+.box{
+    border: 2px solid #f8f9fa; 
+}
+#aboutus{
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+}
+.footer{
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding-top: 100px;
+  }
+  .footer-links a {
+    color: #6c757d;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  .footer1{
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .contact-form {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+  }
+  #foot{
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+  .mycontact{
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+  .mytest{
+    margin-top: 100px;
+  }
+  .myfaqs{
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+  .free{
+    margin-top: 120px;
+    padding-bottom: 100px;
+  }
+  .myservices{
+    margin-top: 120px;
+    padding-bottom: 100px;
+
+  }
+  .btn a{
+    text-decoration: none !important;
+  }

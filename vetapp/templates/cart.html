@@ -1,0 +1,60 @@
+{% extends 'user/base3.html' %}
+
+{% block content %}
+    <!-- Cart Section -->
+    <section id="cart" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Your Cart</h2>
+            <div class="row">
+                {% if cart_items %}
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order_item, product in cart_items %}
+                                    <tr>
+                                        <td>{{ product.product_name }}</td>
+                                        <td>	&#8358;{{ product.product_price }}</td>
+                                        <td>
+                                            {{ order_item.quantity }}
+                                        </td>
+                                        <td class="item-total">	&#8358;{{ order_item.amount }}</td>
+                                        <td>
+                                            <form action="/remove_from_cart/{{ product.product_id }}" method="post" class="remove-form">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                <button type="submit" class="btn btn-danger btn-sm" aria-label="Remove {{ product.product_name }}">Remove</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <tr>
+                                        <td colspan="3" class="text-right"><strong>Total</strong></td>
+                                        <td id="total-amount">	&#8358;{{ total_amount }}</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="/checkout" class="btn btn-primary">Checkout</a>
+                    </div>
+                {% else %}
+                    <div class="col-md-12 text-center">
+                        <p>Your cart is empty.</p>
+                        <a href="/" class="btn btn-secondary">Continue Shopping</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

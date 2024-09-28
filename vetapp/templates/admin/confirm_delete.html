@@ -1,0 +1,25 @@
+{% extends 'admin/base2.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=True)%}
+{% if messages %}
+  {% for cat, msg in messages %}
+    {% if cat =='error'%}
+        <div class="alert alert-danger">{{ msg }}</div>
+    {% else %}
+        <div class="alert alert-success">{{ msg }}</div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the product <strong>{{ product.name }}</strong>?</p>
+
+    <form method="post">
+        <button type="submit">Delete</button>
+        <a href="/">Cancel</a>
+    </form>
+    {% endblock %}
+    
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="/static/style2.css">
+    <link rel="stylesheet" href="/static/FA/css/all.css" >
+    <!-- <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+        
+        .sidebar {
+            background-color: #343a40;
+            height: 100vh;
+            color: #fff;
+            padding-top: 20px;
+        }
+        
+        .sidebar .nav-link {
+            color: #adb5bd;
+        }
+        
+        .sidebar .nav-link.active {
+            color: #fff;
+            background-color: #495057;
+        }
+        
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: #495057;
+        }
+        
+        .sidebar .icon img {
+            vertical-align: middle;
+        }
+
+        .sidebar .title {
+            margin-left: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #495057;
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <span class="icon">
+                                    <img src="/static/img/plus.png" alt="Logo" width="40px">
+                                </span>
+                                <span class="title"><strong>Vet Plus</strong></span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/">
+                               
+                                <span class="title">Dashboard</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/breed/">
+                                <span class="title">Breed</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/addproduct/">
+                                
+                                <span class="title">Products</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/logout">
+                               
+                                <span class="title">Sign Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center py-2">
+        <p class="mb-0">&copy; 2024 Vet Plus. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    {% block customjs %}
+    {% endblock customjs %}
+</body>
+
+</html>
